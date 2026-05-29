@@ -74,14 +74,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Prolific Collections — Bold, modern jewellery" },
+      { name: "description", content: "Editorial, affordable luxury jewellery for women who value timeless, modern style." },
+      { name: "author", content: "Prolific Collections" },
+      { property: "og:title", content: "Prolific Collections" },
+      { property: "og:description", content: "Editorial, affordable luxury jewellery for women who value timeless, modern style." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
