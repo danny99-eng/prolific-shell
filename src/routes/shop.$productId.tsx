@@ -11,6 +11,7 @@ import {
 import { ProductCard, StarRating } from "@/components/product-card";
 import { formatPrice, getProduct, getRelated } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
+import { useWishlist } from "@/lib/wishlist-context";
 
 export const Route = createFileRoute("/shop/$productId")({
   head: ({ params }) => {
@@ -58,7 +59,8 @@ function ProductDetail() {
   const [size, setSize] = useState<(typeof SIZES)[number]>("Medium");
   const [qty, setQty] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
-  const [wishlisted, setWishlisted] = useState(false);
+  const { has: hasWish, toggle: toggleWish } = useWishlist();
+  const wishlisted = hasWish(product.id);
 
   const related = getRelated(product.id, 4);
   const thumbs = [0, 1, 2, 3];
@@ -218,7 +220,7 @@ function ProductDetail() {
             </Button>
             <button
               type="button"
-              onClick={() => setWishlisted((v) => !v)}
+              onClick={() => toggleWish(product.id)}
               className="mt-3 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-foreground hover:text-foreground/70"
             >
               <Heart

@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart-context";
+import { useWishlist } from "@/lib/wishlist-context";
 import { formatPrice } from "@/lib/products";
 
 const navLinks = [
@@ -70,9 +71,7 @@ export function SiteHeader() {
           <IconButton label="Search">
             <Search className="h-5 w-5" />
           </IconButton>
-          <IconButton label="Wishlist">
-            <Heart className="h-5 w-5" />
-          </IconButton>
+          <WishlistIconLink />
 
           <Sheet open={isOpen} onOpenChange={setOpen}>
             <SheetTrigger asChild>
@@ -124,6 +123,24 @@ function IconButton({ label, children }: { label: string; children: React.ReactN
     >
       {children}
     </button>
+  );
+}
+
+function WishlistIconLink() {
+  const { count } = useWishlist();
+  return (
+    <Link
+      to="/wishlist"
+      aria-label="Wishlist"
+      className="relative inline-flex h-10 w-10 items-center justify-center text-foreground transition-colors hover:text-foreground/70"
+    >
+      <Heart className="h-5 w-5" />
+      {count > 0 && (
+        <span className="absolute -right-0.5 -top-0.5 inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-gold px-1 text-[10px] font-semibold text-gold-foreground">
+          {count}
+        </span>
+      )}
+    </Link>
   );
 }
 
@@ -232,8 +249,11 @@ function CartDrawer() {
             <p className="mt-1 text-xs text-muted-foreground">
               Shipping and taxes calculated at checkout.
             </p>
-            <Button className="mt-4 w-full rounded-none bg-gold py-6 text-sm font-semibold uppercase tracking-[0.2em] text-gold-foreground hover:bg-gold/90">
-              Proceed to Checkout
+            <Button
+              asChild
+              className="mt-4 w-full rounded-none bg-gold py-6 text-sm font-semibold uppercase tracking-[0.2em] text-gold-foreground hover:bg-gold/90"
+            >
+              <Link to="/checkout" onClick={close}>Proceed to Checkout</Link>
             </Button>
             <button
               type="button"
