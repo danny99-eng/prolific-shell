@@ -1,9 +1,9 @@
-import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Heart, ShoppingBag, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatPrice, type Product } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
+import { useWishlist } from "@/lib/wishlist-context";
 
 export function StarRating({ rating, className = "" }: { rating: number; className?: string }) {
   return (
@@ -21,8 +21,9 @@ export function StarRating({ rating, className = "" }: { rating: number; classNa
 }
 
 export function ProductCard({ product }: { product: Product }) {
-  const [wishlisted, setWishlisted] = useState(false);
   const { addItem } = useCart();
+  const { has, toggle } = useWishlist();
+  const wishlisted = has(product.id);
 
   return (
     <div className="group">
@@ -48,9 +49,9 @@ export function ProductCard({ product }: { product: Product }) {
           type="button"
           onClick={(e) => {
             e.preventDefault();
-            setWishlisted((v) => !v);
+            toggle(product.id);
           }}
-          aria-label="Add to wishlist"
+          aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
           className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur transition-colors hover:bg-white"
         >
           <Heart
