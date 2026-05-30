@@ -249,8 +249,11 @@ function CartDrawer() {
             <p className="mt-1 text-xs text-muted-foreground">
               Shipping and taxes calculated at checkout.
             </p>
-            <Button className="mt-4 w-full rounded-none bg-gold py-6 text-sm font-semibold uppercase tracking-[0.2em] text-gold-foreground hover:bg-gold/90">
-              Proceed to Checkout
+            <Button
+              asChild
+              className="mt-4 w-full rounded-none bg-gold py-6 text-sm font-semibold uppercase tracking-[0.2em] text-gold-foreground hover:bg-gold/90"
+            >
+              <Link to="/checkout" onClick={close}>Proceed to Checkout</Link>
             </Button>
             <button
               type="button"
