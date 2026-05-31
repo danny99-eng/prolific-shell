@@ -42,7 +42,7 @@ export function SiteHeader() {
             <img
               src={logoColor}
               alt="Prolific Collections"
-              className="h-8 w-auto lg:h-10"
+              className="h-12 w-auto lg:h-[60px]"
             />
           </Link>
         </div>
