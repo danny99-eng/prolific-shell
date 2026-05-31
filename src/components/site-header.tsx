@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist-context";
 import { formatPrice } from "@/lib/products";
+import logoColor from "@/assets/prolific-logo-color.png";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -37,16 +38,12 @@ export function SiteHeader() {
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
 
-          <Link to="/" className="flex items-center gap-2">
-            <span
-              aria-hidden
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-foreground font-serif text-sm text-background"
-            >
-              P
-            </span>
-            <span className="font-serif text-lg tracking-wide text-foreground sm:text-xl">
-              Prolific Collections
-            </span>
+          <Link to="/" className="flex items-center" aria-label="Prolific Collections — Home">
+            <img
+              src={logoColor}
+              alt="Prolific Collections"
+              className="h-8 w-auto lg:h-10"
+            />
           </Link>
         </div>
 
