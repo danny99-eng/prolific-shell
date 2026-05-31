@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Instagram, Facebook } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import logoWhite from "@/assets/prolific-logo-white.png";
 
 const shopLinks = [
   { to: "/shop", label: "Shop All" },
@@ -22,12 +23,15 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-12">
           {/* Brand + newsletter */}
           <div className="lg:col-span-5">
-            <Link to="/" className="font-serif text-2xl tracking-wide">
-              Prolific Collections
+            <Link to="/" aria-label="Prolific Collections — Home" className="inline-flex">
+              <img
+                src={logoWhite}
+                alt="Prolific Collections"
+                className="h-11 w-auto lg:h-14"
+              />
             </Link>
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-background/70">
-              Bold, modern jewellery — crafted to be worn every day, made to feel
-              like nothing else.
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-background/70">
+              Bold jewellery for the modern woman.
             </p>
 
             <form
