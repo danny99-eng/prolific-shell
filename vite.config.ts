@@ -12,7 +12,6 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 // Vercel sets VERCEL=1 during builds; NITRO_PRESET can override locally or in vercel.json.
 const nitroPreset =
   process.env.NITRO_PRESET ?? (process.env.VERCEL ? "vercel" : undefined);
-const isVercel = nitroPreset === "vercel";
 
 export default defineConfig({
   tanstackStart: {
@@ -24,15 +23,6 @@ export default defineConfig({
     ? {
         nitro: {
           preset: nitroPreset,
-          ...(isVercel
-            ? {
-                output: {
-                  dir: ".vercel/output",
-                  serverDir: ".vercel/output/functions/__nitro.func",
-                  publicDir: ".vercel/output/static",
-                },
-              }
-            : {}),
         },
       }
     : {}),
