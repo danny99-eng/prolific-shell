@@ -9,7 +9,9 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 // Nitro is only auto-enabled inside the Lovable sandbox. On external CI like
 // Vercel we opt in explicitly and override the Lovable wrapper's `dist/`
 // output paths so Nitro emits Vercel's Build Output API layout.
-const nitroPreset = process.env.NITRO_PRESET;
+// Vercel sets VERCEL=1 during builds; NITRO_PRESET can override locally or in vercel.json.
+const nitroPreset =
+  process.env.NITRO_PRESET ?? (process.env.VERCEL ? "vercel" : undefined);
 const isVercel = nitroPreset === "vercel";
 
 export default defineConfig({
