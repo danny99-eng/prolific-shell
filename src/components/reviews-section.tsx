@@ -161,6 +161,17 @@ export function ReviewsSection() {
               />
             ))}
           </div>
+
+          <div className="mt-6 text-center">
+            <a
+              href="https://g.page/r/CdsaA35n7h4-EBM/review"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-muted-foreground underline underline-offset-4 transition-colors hover:text-gold"
+            >
+              See all our reviews on Google →
+            </a>
+          </div>
         </div>
       </div>
     </section>
