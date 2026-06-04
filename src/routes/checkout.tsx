@@ -29,8 +29,9 @@ const PAYSTACK_PUBLIC_KEY =
   "pk_test_placeholder_paystack_key";
 
 const shippingMethods = [
-  { id: "standard", label: "Standard Shipping", note: "3–5 business days", price: 3500 },
-  { id: "express", label: "Express Shipping", note: "1–2 business days", price: 7500 },
+  { id: "standard", label: "Standard Shipping", note: "3–5 business days", price: 3.99 },
+  { id: "express", label: "Express Shipping", note: "1–2 business days", price: 7.99 },
+
 ] as const;
 
 export const Route = createFileRoute("/checkout")({

@@ -1,41 +1,39 @@
 import { useState } from "react";
 import { Heart, ShoppingBag, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { formatPrice } from "@/lib/products";
 
 const products = [
   {
     id: 1,
     name: "Aurora Gold Ring",
-    price: 28500,
+    price: 42.0,
     rating: 5,
     gradient: "from-amber-100 to-yellow-100",
   },
   {
     id: 2,
     name: "Luna Pendant Necklace",
-    price: 42000,
+    price: 64.0,
     rating: 5,
     gradient: "from-stone-100 to-stone-200",
   },
   {
     id: 3,
     name: "Celestial Hoop Earrings",
-    price: 31500,
+    price: 48.0,
     rating: 4,
     gradient: "from-orange-50 to-amber-50",
   },
   {
     id: 4,
     name: "Nova Chain Bracelet",
-    price: 23800,
+    price: 36.0,
     rating: 5,
     gradient: "from-yellow-50 to-stone-100",
   },
 ];
 
-function formatPrice(naira: number) {
-  return `₦${naira.toLocaleString("en-NG")}`;
-}
 
 function StarRating({ rating }: { rating: number }) {
   return (

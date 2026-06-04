@@ -245,7 +245,7 @@ function ProductDetail() {
                 Shipping Info
               </AccordionTrigger>
               <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                Standard shipping within Lagos arrives in 2–3 business days. Nationwide delivery in 3–5 business days. Free shipping on orders over ₦50,000.
+                UK standard delivery in 2–3 business days. International shipping in 5–10 business days. Free UK shipping on orders over £75.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="care">
