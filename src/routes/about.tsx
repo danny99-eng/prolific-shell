@@ -50,9 +50,21 @@ function AboutPage() {
                 and to dinner.
               </p>
               <p>
-                Every piece is conceived in our Lagos studio and crafted with hypoallergenic, tarnish-
-                resistant materials. We obsess over the small things — the weight of a chain, the
-                curve of a hoop — so that you don't have to.
+                Every piece is conceived in our Chippenham studio and crafted with hypoallergenic,
+                tarnish-resistant materials. We obsess over the small things — the weight of a
+                chain, the curve of a hoop — so that you don't have to.
+              </p>
+              <p>
+                Visit us at{" "}
+                <a
+                  href="https://maps.app.goo.gl/ARdaw9pGtxMqX9mP9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground underline-offset-4 hover:text-gold hover:underline"
+                >
+                  32 Clark Drive, Chippenham, SN15 1UJ, United Kingdom
+                </a>
+                .
               </p>
               <p className="font-serif text-xl italic text-foreground">"Wear your story."</p>
             </div>
