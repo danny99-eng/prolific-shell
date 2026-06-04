@@ -34,6 +34,23 @@ export function SiteFooter() {
               Bold jewellery for the modern woman.
             </p>
 
+            <div className="mt-8">
+              <h3 className="text-[11px] font-medium uppercase tracking-[0.2em] text-background/60">
+                Visit Us
+              </h3>
+              <a
+                href="https://maps.app.goo.gl/ARdaw9pGtxMqX9mP9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 block text-sm not-italic leading-relaxed text-background/85 transition-colors hover:text-gold"
+              >
+                32 Clark Drive<br />
+                Chippenham<br />
+                SN15 1UJ<br />
+                United Kingdom
+              </a>
+            </div>
+
             <form
               className="mt-8 max-w-sm"
               onSubmit={(e) => e.preventDefault()}
