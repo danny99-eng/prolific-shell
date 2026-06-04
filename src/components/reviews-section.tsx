@@ -7,45 +7,27 @@ import { cn } from "@/lib/utils";
 const reviews = [
   {
     id: 1,
-    name: "Amara O.",
-    location: "Lagos",
+    name: "Paul Ibeneme",
     rating: 5,
-    text: "Absolutely love my gold stackable rings. The quality is incredible for the price. Will definitely be ordering again!",
+    text: "Best product ever, you will not know you have them on as it leaves no rash or hotness on the skin. I don't go to bed with earrings, but recently I came back from an event, went straight to bed and woke up the next day only to realise I still had them on. Wow, this was it for me. There was no discomfort with them on while I slept.",
   },
   {
     id: 2,
-    name: "Funke A.",
-    location: "Abuja",
+    name: "Sharon Aigbehi",
     rating: 5,
-    text: "I wore the crystal necklace to my friend's wedding and received so many compliments. Prolific Collections never disappoints.",
+    text: "Very professional and orders are true to pictures. I will recommend Prolific Collections to friends and family. ❤️",
   },
   {
     id: 3,
-    name: "Temi B.",
-    location: "Port Harcourt",
+    name: "Yetunde Adewunmi",
     rating: 5,
-    text: "Fast delivery and the packaging was so beautiful. Felt like a luxury unboxing experience.",
+    text: "Amazing quality! I've been wearing jewellery from this brand for over 5 months and it still looks good as new. Highly recommend.",
   },
   {
     id: 4,
-    name: "Chisom E.",
-    location: "Enugu",
+    name: "Rose Betts",
     rating: 5,
-    text: "The earrings are even more stunning in person. Great craftsmanship and true to the photos.",
-  },
-  {
-    id: 5,
-    name: "Bisi L.",
-    location: "Ibadan",
-    rating: 5,
-    text: "I have bought from several jewellery brands online and Prolific Collections is by far the best quality I have found.",
-  },
-  {
-    id: 6,
-    name: "Ngozi K.",
-    location: "Lagos",
-    rating: 5,
-    text: "Bought the bangle set as a birthday gift for my mum and she absolutely loved it. Thank you!",
+    text: "I am elevated to a new level with these precious jewellery. You can only stand out. It is walking with confidence whenever I wear them. ❤️",
   },
 ];
 
@@ -152,7 +134,7 @@ export function ReviewsSection() {
                       <div className="mt-8">
                         <p className="font-semibold text-foreground">{review.name}</p>
                         <p className="mt-1 text-xs text-muted-foreground">
-                          {review.location}
+                          ✓ Verified Google Review
                         </p>
                       </div>
                     </div>
@@ -178,6 +160,17 @@ export function ReviewsSection() {
                 )}
               />
             ))}
+          </div>
+
+          <div className="mt-6 text-center">
+            <a
+              href="https://g.page/r/CdsaA35n7h4-EBM/review"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-muted-foreground underline underline-offset-4 transition-colors hover:text-gold"
+            >
+              See all our reviews on Google →
+            </a>
           </div>
         </div>
       </div>
