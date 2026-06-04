@@ -134,7 +134,7 @@ export function ReviewsSection() {
                       <div className="mt-8">
                         <p className="font-semibold text-foreground">{review.name}</p>
                         <p className="mt-1 text-xs text-muted-foreground">
-                          {review.location}
+                          ✓ Verified Google Review
                         </p>
                       </div>
                     </div>
