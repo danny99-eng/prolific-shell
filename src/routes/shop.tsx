@@ -9,7 +9,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ProductCard } from "@/components/product-card";
-import { products, type Category } from "@/lib/products";
+import { ProductGridSkeleton } from "@/components/product-skeletons";
+import { getAllProducts } from "@/lib/products.server";
+import type { Category } from "@/lib/products";
 
 export const Route = createFileRoute("/shop")({
   head: () => ({
@@ -20,8 +22,26 @@ export const Route = createFileRoute("/shop")({
       { property: "og:description", content: "Bold, modern jewellery for the modern woman." },
     ],
   }),
+  loader: () => getAllProducts(),
+  pendingComponent: ShopPending,
   component: ShopLayout,
 });
+
+function ShopPending() {
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <div className="text-center">
+        <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold">
+          Collection
+        </span>
+        <h1 className="mt-3 font-serif text-4xl text-foreground sm:text-5xl">
+          Shop All Jewellery
+        </h1>
+      </div>
+      <ProductGridSkeleton count={8} />
+    </section>
+  );
+}
 
 function ShopLayout() {
   const matches = useMatches();
@@ -37,12 +57,14 @@ type Sort = "featured" | "price-asc" | "price-desc" | "newest";
 const PAGE_SIZE = 8;
 
 function ShopIndex() {
+  const products = Route.useLoaderData();
   const [filter, setFilter] = useState<Filter>("All");
   const [sort, setSort] = useState<Sort>("featured");
   const [visible, setVisible] = useState(PAGE_SIZE);
 
   const filtered = useMemo(() => {
-    let list = filter === "All" ? products : products.filter((p) => p.category === (filter as Category));
+    let list =
+      filter === "All" ? products : products.filter((p) => p.category === (filter as Category));
     list = [...list];
     switch (sort) {
       case "price-asc":
@@ -52,11 +74,14 @@ function ShopIndex() {
         list.sort((a, b) => b.price - a.price);
         break;
       case "newest":
-        list.sort((a, b) => b.createdAt - a.createdAt);
+        list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        break;
+      case "featured":
+        list.sort((a, b) => Number(b.featured) - Number(a.featured));
         break;
     }
     return list;
-  }, [filter, sort]);
+  }, [products, filter, sort]);
 
   const shown = filtered.slice(0, visible);
   const hasMore = visible < filtered.length;
@@ -75,7 +100,6 @@ function ShopIndex() {
         </p>
       </div>
 
-      {/* Filter / sort bar */}
       <div className="mt-10 flex flex-col gap-4 border-y border-border py-4 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-wrap items-center gap-1">
           {CATEGORIES.map((c) => (
@@ -86,11 +110,10 @@ function ShopIndex() {
                 setFilter(c);
                 setVisible(PAGE_SIZE);
               }}
-              className={`rounded-none px-3 py-1.5 text-xs font-medium uppercase tracking-[0.18em] transition-colors ${
-                filter === c
+              className={`rounded-none px-3 py-1.5 text-xs font-medium uppercase tracking-[0.18em] transition-colors ${filter === c
                   ? "bg-foreground text-background"
                   : "text-foreground/70 hover:text-foreground"
-              }`}
+                }`}
             >
               {c}
             </button>
@@ -119,11 +142,17 @@ function ShopIndex() {
         Showing {shown.length} of {filtered.length} pieces
       </p>
 
-      <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">
-        {shown.map((p) => (
-          <ProductCard key={p.id} product={p} />
-        ))}
-      </div>
+      {filtered.length === 0 ? (
+        <p className="mt-16 text-center text-sm text-muted-foreground">
+          No products yet. Add pieces in Sanity Studio to populate the shop.
+        </p>
+      ) : (
+        <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">
+          {shown.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
+        </div>
+      )}
 
       {hasMore && (
         <div className="mt-16 flex justify-center">

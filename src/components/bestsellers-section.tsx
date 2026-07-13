@@ -1,70 +1,18 @@
-import { useState } from "react";
-import { Heart, ShoppingBag, Star } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Heart, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { formatPrice, getProductImageUrl, type Product } from "@/lib/products";
+import { useCart } from "@/lib/cart-context";
+import { useWishlist } from "@/lib/wishlist-context";
 
-const products = [
-  {
-    id: 1,
-    name: "Aurora Gold Ring",
-    price: 28500,
-    rating: 5,
-    gradient: "from-amber-100 to-yellow-100",
-  },
-  {
-    id: 2,
-    name: "Luna Pendant Necklace",
-    price: 42000,
-    rating: 5,
-    gradient: "from-stone-100 to-stone-200",
-  },
-  {
-    id: 3,
-    name: "Celestial Hoop Earrings",
-    price: 31500,
-    rating: 4,
-    gradient: "from-orange-50 to-amber-50",
-  },
-  {
-    id: 4,
-    name: "Nova Chain Bracelet",
-    price: 23800,
-    rating: 5,
-    gradient: "from-yellow-50 to-stone-100",
-  },
-];
+type BestsellersSectionProps = {
+  products: Product[];
+};
 
-function formatPrice(naira: number) {
-  return `₦${naira.toLocaleString("en-NG")}`;
-}
-
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className="flex items-center gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={`h-3.5 w-3.5 ${
-            i < rating
-              ? "fill-gold text-gold"
-              : "fill-muted text-muted-foreground"
-          }`}
-        />
-      ))}
-    </div>
-  );
-}
-
-export function BestsellersSection() {
-  const [wishlisted, setWishlisted] = useState<Set<number>>(new Set());
-
-  const toggleWishlist = (id: number) => {
-    setWishlisted((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  };
+export function BestsellersSection({ products }: BestsellersSectionProps) {
+  if (products.length === 0) {
+    return null;
+  }
 
   return (
     <section className="bg-muted/30">
@@ -80,60 +28,102 @@ export function BestsellersSection() {
 
         <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((product) => (
-            <div key={product.id} className="group">
-              {/* Image placeholder */}
-              <div className="relative aspect-[3/4] overflow-hidden bg-background">
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${product.gradient} transition-transform duration-500 group-hover:scale-105`}
-                >
-                  <div className="flex h-full w-full items-center justify-center">
-                    <span className="font-serif text-7xl text-foreground/10">
-                      {product.name[0]}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Wishlist button */}
-                <button
-                  type="button"
-                  onClick={() => toggleWishlist(product.id)}
-                  aria-label="Add to wishlist"
-                  className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur transition-colors hover:bg-white"
-                >
-                  <Heart
-                    className={`h-4 w-4 transition-colors ${
-                      wishlisted.has(product.id)
-                        ? "fill-red-500 text-red-500"
-                        : "text-foreground"
-                    }`}
-                  />
-                </button>
-
-                {/* Quick add overlay */}
-                <div className="absolute inset-x-0 bottom-0 translate-y-full bg-white/95 p-4 backdrop-blur transition-transform duration-300 group-hover:translate-y-0">
-                  <Button className="w-full rounded-none bg-foreground text-sm font-semibold uppercase tracking-[0.1em] text-background hover:bg-foreground/90">
-                    <ShoppingBag className="mr-2 h-4 w-4" />
-                    Add to Cart
-                  </Button>
-                </div>
-              </div>
-
-              {/* Product info */}
-              <div className="mt-4">
-                <h3 className="font-serif text-lg text-foreground">
-                  {product.name}
-                </h3>
-                <div className="mt-1 flex items-center justify-between">
-                  <p className="text-sm font-medium text-foreground">
-                    {formatPrice(product.price)}
-                  </p>
-                  <StarRating rating={product.rating} />
-                </div>
-              </div>
-            </div>
+            <BestsellerCard key={product.id} product={product} />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function BestsellerCard({ product }: { product: Product }) {
+  const { addItem } = useCart();
+  const { has, toggle } = useWishlist();
+  const wishlisted = has(product.id);
+  const imageUrl = getProductImageUrl(product);
+  const outOfStock = !product.inStock;
+
+  return (
+    <div className="group">
+      <div className="relative aspect-[3/4] overflow-hidden bg-background">
+        <Link
+          to="/shop/$productId"
+          params={{ productId: product.id }}
+          className="block h-full w-full"
+          aria-label={product.name}
+        >
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={product.name}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-muted">
+              <span className="font-serif text-7xl text-foreground/10">{product.name[0]}</span>
+            </div>
+          )}
+        </Link>
+
+        {product.badge && (
+          <span className="absolute left-3 top-3 bg-foreground px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-background">
+            {product.badge}
+          </span>
+        )}
+
+        {outOfStock && (
+          <span className="absolute bottom-3 left-3 bg-background/95 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground">
+            Out of Stock
+          </span>
+        )}
+
+        <button
+          type="button"
+          onClick={() => toggle(product.id)}
+          aria-label="Add to wishlist"
+          className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur transition-colors hover:bg-white"
+        >
+          <Heart
+            className={`h-4 w-4 transition-colors ${
+              wishlisted ? "fill-red-500 text-red-500" : "text-foreground"
+            }`}
+          />
+        </button>
+
+        {!outOfStock && (
+          <div className="absolute inset-x-0 bottom-0 translate-y-full bg-white/95 p-4 backdrop-blur transition-transform duration-300 group-hover:translate-y-0">
+            <Button
+              onClick={() =>
+                addItem({
+                  productId: product.id,
+                  name: product.name,
+                  price: product.price,
+                  imageUrl,
+                  material: product.variants[0] ?? "Standard",
+                  size: "One Size",
+                  quantity: 1,
+                })
+              }
+              className="w-full rounded-none bg-foreground text-sm font-semibold uppercase tracking-[0.1em] text-background hover:bg-foreground/90"
+            >
+              <ShoppingBag className="mr-2 h-4 w-4" />
+              Add to Cart
+            </Button>
+          </div>
+        )}
+      </div>
+
+      <div className="mt-4">
+        <Link
+          to="/shop/$productId"
+          params={{ productId: product.id }}
+          className="font-serif text-lg text-foreground hover:text-foreground/70"
+        >
+          {product.name}
+        </Link>
+        <p className="mt-1 text-sm font-medium text-foreground">{formatPrice(product.price)}</p>
+      </div>
+    </div>
   );
 }

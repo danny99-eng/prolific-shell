@@ -72,10 +72,14 @@ function ConfirmationPage() {
           <ul className="divide-y divide-border px-6">
             {snapshot.map((item) => (
               <li key={item.key} className="flex gap-4 py-4">
-                <div className={`relative h-20 w-16 flex-shrink-0 overflow-hidden bg-gradient-to-br ${item.gradient}`}>
-                  <div className="flex h-full w-full items-center justify-center">
-                    <span className="font-serif text-2xl text-foreground/20">{item.name[0]}</span>
-                  </div>
+                <div className="relative h-20 w-16 flex-shrink-0 overflow-hidden bg-muted">
+                  {item.imageUrl ? (
+                    <img src={item.imageUrl} alt="" className="h-full w-full object-cover" />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center">
+                      <span className="font-serif text-2xl text-foreground/20">{item.name[0]}</span>
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-1 items-center justify-between">
                   <div>

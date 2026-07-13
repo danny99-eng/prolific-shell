@@ -229,10 +229,14 @@ function CheckoutPage() {
             <ul className="mt-5 divide-y divide-border">
               {items.map((item) => (
                 <li key={item.key} className="flex gap-4 py-4">
-                  <div className={`relative h-20 w-16 flex-shrink-0 overflow-hidden bg-gradient-to-br ${item.gradient}`}>
-                    <div className="flex h-full w-full items-center justify-center">
-                      <span className="font-serif text-2xl text-foreground/20">{item.name[0]}</span>
-                    </div>
+                  <div className="relative h-20 w-16 flex-shrink-0 overflow-hidden bg-muted">
+                    {item.imageUrl ? (
+                      <img src={item.imageUrl} alt="" className="h-full w-full object-cover" />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center">
+                        <span className="font-serif text-2xl text-foreground/20">{item.name[0]}</span>
+                      </div>
+                    )}
                     <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-foreground px-1 text-[10px] font-semibold text-background">
                       {item.quantity}
                     </span>

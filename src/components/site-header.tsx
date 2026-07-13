@@ -176,12 +176,14 @@ function CartDrawer() {
             <ul className="divide-y divide-border">
               {items.map((item) => (
                 <li key={item.key} className="flex gap-4 py-4">
-                  <div className={`relative h-24 w-20 flex-shrink-0 overflow-hidden bg-gradient-to-br ${item.gradient}`}>
-                    <div className="flex h-full w-full items-center justify-center">
-                      <span className="font-serif text-2xl text-foreground/20">
-                        {item.name[0]}
-                      </span>
-                    </div>
+                  <div className="relative h-24 w-20 flex-shrink-0 overflow-hidden bg-muted">
+                    {item.imageUrl ? (
+                      <img src={item.imageUrl} alt="" className="h-full w-full object-cover" />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center">
+                        <span className="font-serif text-2xl text-foreground/20">{item.name[0]}</span>
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-1 flex-col">
                     <div className="flex items-start justify-between gap-2">

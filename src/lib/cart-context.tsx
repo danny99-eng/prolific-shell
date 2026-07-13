@@ -5,7 +5,7 @@ export type CartItem = {
   productId: string;
   name: string;
   price: number;
-  gradient: string;
+  imageUrl: string;
   material: string;
   size: string;
   quantity: number;
