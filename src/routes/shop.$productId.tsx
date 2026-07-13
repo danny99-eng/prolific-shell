@@ -259,8 +259,12 @@ function ProductDetail() {
                 Shipping Info
               </AccordionTrigger>
               <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+<<<<<<< HEAD
                 Standard UK delivery in 2–4 business days. Express options available at checkout. Free
                 shipping on orders over £150.
+=======
+                UK standard delivery in 2–3 business days. International shipping in 5–10 business days. Free UK shipping on orders over £75.
+>>>>>>> 4e1fa053e115bb4d38bdc4b7f72a640b7e6d3bc4
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="care">

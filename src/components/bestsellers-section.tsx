@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Heart, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+<<<<<<< HEAD
 import { formatPrice, getProductImageUrl, type Product } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist-context";
@@ -13,6 +14,70 @@ export function BestsellersSection({ products }: BestsellersSectionProps) {
   if (products.length === 0) {
     return null;
   }
+=======
+import { formatPrice } from "@/lib/products";
+
+const products = [
+  {
+    id: 1,
+    name: "Aurora Gold Ring",
+    price: 42.0,
+    rating: 5,
+    gradient: "from-amber-100 to-yellow-100",
+  },
+  {
+    id: 2,
+    name: "Luna Pendant Necklace",
+    price: 64.0,
+    rating: 5,
+    gradient: "from-stone-100 to-stone-200",
+  },
+  {
+    id: 3,
+    name: "Celestial Hoop Earrings",
+    price: 48.0,
+    rating: 4,
+    gradient: "from-orange-50 to-amber-50",
+  },
+  {
+    id: 4,
+    name: "Nova Chain Bracelet",
+    price: 36.0,
+    rating: 5,
+    gradient: "from-yellow-50 to-stone-100",
+  },
+];
+
+
+function StarRating({ rating }: { rating: number }) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          className={`h-3.5 w-3.5 ${
+            i < rating
+              ? "fill-gold text-gold"
+              : "fill-muted text-muted-foreground"
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
+
+export function BestsellersSection() {
+  const [wishlisted, setWishlisted] = useState<Set<number>>(new Set());
+
+  const toggleWishlist = (id: number) => {
+    setWishlisted((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+>>>>>>> 4e1fa053e115bb4d38bdc4b7f72a640b7e6d3bc4
 
   return (
     <section className="bg-muted/30">
