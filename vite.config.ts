@@ -14,6 +14,9 @@ const enableNitro =
   process.env.VERCEL === "true";
 
 export default defineConfig({
+  // Expose SANITY_ and VITE_ env vars to the client/server runtime
+  envPrefix: ["SANITY_", "VITE_"],
+
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
