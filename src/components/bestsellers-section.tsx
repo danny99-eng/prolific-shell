@@ -1,83 +1,18 @@
 import { Link } from "@tanstack/react-router";
 import { Heart, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
-<<<<<<< HEAD
 import { formatPrice, getProductImageUrl, type Product } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist-context";
+import { ProductCardSkeleton } from "@/components/product-skeletons";
 
 type BestsellersSectionProps = {
   products: Product[];
 };
 
 export function BestsellersSection({ products }: BestsellersSectionProps) {
-  if (products.length === 0) {
-    return null;
-  }
-=======
-import { formatPrice } from "@/lib/products";
-
-const products = [
-  {
-    id: 1,
-    name: "Aurora Gold Ring",
-    price: 42.0,
-    rating: 5,
-    gradient: "from-amber-100 to-yellow-100",
-  },
-  {
-    id: 2,
-    name: "Luna Pendant Necklace",
-    price: 64.0,
-    rating: 5,
-    gradient: "from-stone-100 to-stone-200",
-  },
-  {
-    id: 3,
-    name: "Celestial Hoop Earrings",
-    price: 48.0,
-    rating: 4,
-    gradient: "from-orange-50 to-amber-50",
-  },
-  {
-    id: 4,
-    name: "Nova Chain Bracelet",
-    price: 36.0,
-    rating: 5,
-    gradient: "from-yellow-50 to-stone-100",
-  },
-];
-
-
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className="flex items-center gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={`h-3.5 w-3.5 ${
-            i < rating
-              ? "fill-gold text-gold"
-              : "fill-muted text-muted-foreground"
-          }`}
-        />
-      ))}
-    </div>
-  );
-}
-
-export function BestsellersSection() {
-  const [wishlisted, setWishlisted] = useState<Set<number>>(new Set());
-
-  const toggleWishlist = (id: number) => {
-    setWishlisted((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  };
->>>>>>> 4e1fa053e115bb4d38bdc4b7f72a640b7e6d3bc4
+  console.log("BestsellersSection received products:", products);
+  const isEmpty = products.length === 0;
 
   return (
     <section className="bg-muted/30">
@@ -92,10 +27,15 @@ export function BestsellersSection() {
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product) => (
-            <BestsellerCard key={product.id} product={product} />
-          ))}
+          {isEmpty
+            ? Array.from({ length: 4 }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))
+            : products.map((product) => (
+              <BestsellerCard key={product.id} product={product} />
+            ))}
         </div>
+
       </div>
     </section>
   );
@@ -150,9 +90,8 @@ function BestsellerCard({ product }: { product: Product }) {
           className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-sm backdrop-blur transition-colors hover:bg-white"
         >
           <Heart
-            className={`h-4 w-4 transition-colors ${
-              wishlisted ? "fill-red-500 text-red-500" : "text-foreground"
-            }`}
+            className={`h-4 w-4 transition-colors ${wishlisted ? "fill-red-500 text-red-500" : "text-foreground"
+              }`}
           />
         </button>
 

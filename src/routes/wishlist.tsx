@@ -6,7 +6,7 @@ import { ProductGridSkeleton } from "@/components/product-skeletons";
 import { useWishlist } from "@/lib/wishlist-context";
 import { useCart } from "@/lib/cart-context";
 import { formatPrice, getProductImageUrl } from "@/lib/products";
-import { getProductsBySlugs } from "@/lib/products.server";
+import { getProductsBySlugs } from "@/lib/product.server";
 
 export const Route = createFileRoute("/wishlist")({
   head: () => ({

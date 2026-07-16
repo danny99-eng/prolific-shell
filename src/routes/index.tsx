@@ -5,7 +5,7 @@ import { BestsellersSection } from "@/components/bestsellers-section";
 import { BestsellersSkeleton } from "@/components/product-skeletons";
 import { ReviewsSection } from "@/components/reviews-section";
 import { SocialProofBanner } from "@/components/social-proof-banner";
-import { getFeaturedProducts } from "@/lib/products.server";
+import { getFeaturedProducts } from "@/lib/product.server";
 
 export const Route = createFileRoute("/")({
   head: () => ({

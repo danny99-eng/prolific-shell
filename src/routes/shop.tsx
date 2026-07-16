@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import { ProductCard } from "@/components/product-card";
 import { ProductGridSkeleton } from "@/components/product-skeletons";
-import { getAllProducts } from "@/lib/products.server";
+import { getAllProducts } from "@/lib/product.server";
 import type { Category } from "@/lib/products";
 
 export const Route = createFileRoute("/shop")({
@@ -64,7 +64,9 @@ function ShopIndex() {
 
   const filtered = useMemo(() => {
     let list =
-      filter === "All" ? products : products.filter((p) => p.category === (filter as Category));
+      filter === "All"
+        ? products
+        : products.filter((p) => p.category?.toLowerCase() === filter.toLowerCase());
     list = [...list];
     switch (sort) {
       case "price-asc":
@@ -111,8 +113,8 @@ function ShopIndex() {
                 setVisible(PAGE_SIZE);
               }}
               className={`rounded-none px-3 py-1.5 text-xs font-medium uppercase tracking-[0.18em] transition-colors ${filter === c
-                  ? "bg-foreground text-background"
-                  : "text-foreground/70 hover:text-foreground"
+                ? "bg-foreground text-background"
+                : "text-foreground/70 hover:text-foreground"
                 }`}
             >
               {c}
@@ -144,7 +146,7 @@ function ShopIndex() {
 
       {filtered.length === 0 ? (
         <p className="mt-16 text-center text-sm text-muted-foreground">
-          No products yet. Add pieces in Sanity Studio to populate the shop.
+          No products in this category yet. Check back soon.
         </p>
       ) : (
         <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">

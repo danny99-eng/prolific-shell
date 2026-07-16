@@ -11,7 +11,7 @@ import {
 import { ProductCard } from "@/components/product-card";
 import { ProductDetailSkeleton } from "@/components/product-skeletons";
 import { formatPrice, getProductImageUrl } from "@/lib/products";
-import { getProductBySlug, getRelatedProducts } from "@/lib/products.server";
+import { getProductBySlug, getRelatedProducts } from "@/lib/product.server";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist-context";
 
@@ -112,9 +112,8 @@ function ProductDetail() {
                   key={i}
                   type="button"
                   onClick={() => setActiveImage(i)}
-                  className={`relative aspect-square overflow-hidden border-2 transition-colors ${
-                    activeImage === i ? "border-foreground" : "border-transparent"
-                  }`}
+                  className={`relative aspect-square overflow-hidden border-2 transition-colors ${activeImage === i ? "border-foreground" : "border-transparent"
+                    }`}
                 >
                   {url ? (
                     <img src={url} alt="" className="h-full w-full object-cover" />
@@ -154,11 +153,10 @@ function ProductDetail() {
                     key={m}
                     type="button"
                     onClick={() => setMaterial(m)}
-                    className={`border px-4 py-2 text-xs uppercase tracking-[0.14em] transition-colors ${
-                      material === m
-                        ? "border-foreground bg-foreground text-background"
-                        : "border-border text-foreground hover:border-foreground"
-                    }`}
+                    className={`border px-4 py-2 text-xs uppercase tracking-[0.14em] transition-colors ${material === m
+                      ? "border-foreground bg-foreground text-background"
+                      : "border-border text-foreground hover:border-foreground"
+                      }`}
                   >
                     {m}
                   </button>
@@ -177,11 +175,10 @@ function ProductDetail() {
                   key={s}
                   type="button"
                   onClick={() => setSize(s)}
-                  className={`min-w-[60px] border px-4 py-2 text-xs uppercase tracking-[0.14em] transition-colors ${
-                    size === s
-                      ? "border-foreground bg-foreground text-background"
-                      : "border-border text-foreground hover:border-foreground"
-                  }`}
+                  className={`min-w-[60px] border px-4 py-2 text-xs uppercase tracking-[0.14em] transition-colors ${size === s
+                    ? "border-foreground bg-foreground text-background"
+                    : "border-border text-foreground hover:border-foreground"
+                    }`}
                 >
                   {s}
                 </button>
@@ -259,12 +256,8 @@ function ProductDetail() {
                 Shipping Info
               </AccordionTrigger>
               <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-<<<<<<< HEAD
-                Standard UK delivery in 2–4 business days. Express options available at checkout. Free
-                shipping on orders over £150.
-=======
                 UK standard delivery in 2–3 business days. International shipping in 5–10 business days. Free UK shipping on orders over £75.
->>>>>>> 4e1fa053e115bb4d38bdc4b7f72a640b7e6d3bc4
+
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="care">
