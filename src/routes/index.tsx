@@ -5,7 +5,7 @@ import { BestsellersSection } from "@/components/bestsellers-section";
 import { BestsellersSkeleton } from "@/components/product-skeletons";
 import { ReviewsSection } from "@/components/reviews-section";
 import { SocialProofBanner } from "@/components/social-proof-banner";
-import { getFeaturedProducts } from "@/lib/product.server";
+import { getFeaturedProducts, getAllProducts } from "@/lib/product.server";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -18,7 +18,13 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  loader: () => getFeaturedProducts(),
+  loader: async () => {
+    const [featured, all] = await Promise.all([
+      getFeaturedProducts(),
+      getAllProducts(),
+    ]);
+    return { featured, all };
+  },
   pendingComponent: HomePending,
   component: Index,
 });
@@ -27,7 +33,7 @@ function HomePending() {
   return (
     <>
       <HeroSection />
-      <FeaturedCategories />
+      <FeaturedCategories products={[]} />
       <BestsellersSkeleton />
       <ReviewsSection />
       <SocialProofBanner />
@@ -36,13 +42,13 @@ function HomePending() {
 }
 
 function Index() {
-  const featuredProducts = Route.useLoaderData();
+  const { featured, all } = Route.useLoaderData();
 
   return (
     <>
       <HeroSection />
-      <FeaturedCategories />
-      <BestsellersSection products={featuredProducts} />
+      <FeaturedCategories products={all} />
+      <BestsellersSection products={featured} />
       <ReviewsSection />
       <SocialProofBanner />
     </>
