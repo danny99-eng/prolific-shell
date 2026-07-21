@@ -44,9 +44,7 @@ export function SiteFooter() {
                 rel="noopener noreferrer"
                 className="mt-3 block text-sm not-italic leading-relaxed text-background/85 transition-colors hover:text-gold"
               >
-                32 Clark Drive<br />
                 Chippenham<br />
-                SN15 1UJ<br />
                 United Kingdom
               </a>
             </div>
@@ -89,17 +87,14 @@ export function SiteFooter() {
                 Follow
               </h3>
               <ul className="mt-4 flex gap-3">
-                <SocialIcon href="https://instagram.com" label="Instagram">
+                <SocialIcon href="https://www.instagram.com/prolific_collections?igsh=eDZxZHFocTF3Mzlu&utm_source=qr" label="Instagram">
                   <Instagram className="h-4 w-4" />
                 </SocialIcon>
-                <SocialIcon href="https://tiktok.com" label="TikTok">
+                <SocialIcon href="https://www.tiktok.com/@prolific_collections" label="TikTok">
                   <TikTokIcon />
                 </SocialIcon>
-                <SocialIcon href="https://facebook.com" label="Facebook">
+                <SocialIcon href="https://www.facebook.com/share/1GXYLSPtTd/?mibextid=wwXIfr" label="Facebook">
                   <Facebook className="h-4 w-4" />
-                </SocialIcon>
-                <SocialIcon href="https://x.com" label="X">
-                  <XIcon />
                 </SocialIcon>
               </ul>
             </div>
@@ -175,10 +170,4 @@ function TikTokIcon() {
   );
 }
 
-function XIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5" aria-hidden>
-      <path d="M18.244 2H21.5l-7.5 8.57L23 22h-6.83l-5.34-6.98L4.8 22H1.54l8.03-9.18L1 2h6.97l4.83 6.39L18.244 2zm-2.4 18h1.9L7.27 4h-2L15.844 20z" />
-    </svg>
-  );
-}
+

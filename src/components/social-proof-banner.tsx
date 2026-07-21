@@ -1,4 +1,4 @@
-import { Instagram } from "lucide-react";
+import { Instagram, Facebook } from "lucide-react";
 
 function TikTokIcon() {
   return (
@@ -14,12 +14,12 @@ export function SocialProofBanner() {
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-6 px-4 py-10 sm:flex-row sm:gap-10 sm:px-6 lg:px-8">
         <p className="text-center text-sm font-medium uppercase tracking-[0.2em] text-background/80">
           Follow us{" "}
-          <span className="text-gold">@prolificcollections</span>
+          <span className="text-gold">@prolific_collections</span>
         </p>
 
         <div className="flex items-center gap-4">
           <a
-            href="https://instagram.com/prolificcollections"
+            href="https://www.instagram.com/prolific_collections?igsh=eDZxZHFocTF3Mzlu&utm_source=qr"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
@@ -28,13 +28,22 @@ export function SocialProofBanner() {
             <Instagram className="h-5 w-5" />
           </a>
           <a
-            href="https://tiktok.com/@prolificcollections"
+            href="https://www.tiktok.com/@prolific_collections"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="TikTok"
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-background/25 text-background/80 transition-colors hover:border-gold hover:text-gold"
           >
             <TikTokIcon />
+          </a>
+          <a
+            href="https://www.facebook.com/share/1GXYLSPtTd/?mibextid=wwXIfr"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-background/25 text-background/80 transition-colors hover:border-gold hover:text-gold"
+          >
+            <Facebook className="h-5 w-5" />
           </a>
         </div>
       </div>

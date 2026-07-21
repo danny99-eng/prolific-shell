@@ -91,9 +91,9 @@ function ContactPage() {
         )}
       </form>
 
-      <div className="mt-16 grid gap-6 border-t border-border pt-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-16 grid gap-8 border-t border-border pt-10 sm:grid-cols-2 lg:grid-cols-4">
         <InfoBlock icon={Mail} title="Email" value="hello@prolificcollections.com" />
-        <InfoBlock icon={Instagram} title="Instagram" value="@prolificcollections" />
+        <InfoBlock icon={Instagram} title="Instagram" value="@prolific_collections" />
         <InfoBlock icon={Clock} title="Response time" value="Within 24 hours, Mon–Fri" />
         <div className="text-center sm:text-left">
           <div className="mx-auto inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 text-gold sm:mx-0">
@@ -106,9 +106,8 @@ function ContactPage() {
             rel="noopener noreferrer"
             className="mt-1 block text-sm font-medium leading-relaxed text-foreground transition-colors hover:text-gold"
           >
-            32 Clark Drive<br />
             Chippenham<br />
-            SN15 1UJ<br />
+            <br />
             United Kingdom
           </a>
         </div>
@@ -132,7 +131,7 @@ function InfoBlock({
         <Icon className="h-4 w-4" />
       </div>
       <p className="mt-3 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{title}</p>
-      <p className="mt-1 text-sm font-medium text-foreground">{value}</p>
+      <p className="mt-1 text-sm font-medium text-foreground break-all">{value}</p>
     </div>
   );
 }
